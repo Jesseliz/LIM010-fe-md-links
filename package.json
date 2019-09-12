@@ -1,0 +1,40 @@
+{
+  "name": "lim010-fe-md-links",
+  "version": "1.0.0",
+  "description": "[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado\r ligero muy popular entre developers. Es usado en muchísimas plataformas que\r manejan texto plano (GitHub, foros, blogs, ...), y es muy común\r encontrar varios archivos en ese formato en cualquier tipo de repositorio\r (empezando por el tradicional `README.md`).",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint --ext .js src/ test/",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jesseliz/LIM010-fe-md-links.git"
+  },
+  "author": "Yesseliz Choque",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jesseliz/LIM010-fe-md-links/issues"
+  },
+  "homepage": "https://github.com/Jesseliz/LIM010-fe-md-links#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.9.0",
+    "stylelint-config-recommended": "^2.2.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "core-util-is": "^1.0.2",
+    "gitignore": "^0.6.0",
+    "is-valid-path": "^0.1.1",
+    "slash": "^3.0.0",
+    "stylelint": "^10.1.0"
+  }
+}
