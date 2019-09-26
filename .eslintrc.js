@@ -1,21 +1,20 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
     es6: true,
-    jest: true,
+    jest: true
   },
   extends: [
-    'airbnb-base',
+    "airbnb-base"
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-    firebase: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
   plugins: ['jest'],
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   rules: {
     'prefer-destructuring': 0,
@@ -27,6 +26,6 @@ module.exports = {
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
     'no-param-reassign': 0,
-    'linebreak-style': 0,
+    'linebreak-style': 0
   },
 };

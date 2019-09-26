@@ -13,13 +13,15 @@
   },
   "author": "Yesseliz Choque",
   "license": "MIT",
+  "bin": {
+    "md-links": "src/cli.js"
+  },
   "bugs": {
     "url": "https://github.com/Jesseliz/LIM010-fe-md-links/issues"
   },
   "homepage": "https://github.com/Jesseliz/LIM010-fe-md-links#readme",
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
-    "eslint": "^6.1.0",
+    "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.17.0",
@@ -30,10 +32,11 @@
     "stylelint-config-recommended": "^2.2.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.6.0",
     "core-util-is": "^1.0.2",
     "gitignore": "^0.6.0",
     "is-valid-path": "^0.1.1",
+    "marked": "^0.7.0",
+    "node-fetch": "^2.6.0",
     "slash": "^3.0.0",
     "stylelint": "^10.1.0"
   }
