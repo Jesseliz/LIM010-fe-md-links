@@ -2,6 +2,7 @@
 // import { readPath, convertToAbsoluteRute, readMdExtend } from '../src/main.js';
 const path = require('path');
 const moduleImport = require('../src/main.js');
+const cliImport = require('../src/cliMdLinks.js');
 
 const testDirectory = path.join(process.cwd(), 'test');
 const mdFile = path.join(process.cwd(), 'test', 'testData', 'prueba.md');
@@ -10,15 +11,13 @@ const subMdFile = path.join(testDirectory, 'testData', 'subPath', 'subPrueba.md'
 const readFileMdArray = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',
   textPath: 'Markdown',
-  filePath:
-    'C:\\Users\\Yesseliz\\Desktop\\LIM010-fe-md-links\\test\\testData\\prueba.md',
+  filePath: mdFile,
 };
 
 const linkOk = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',
   textPath: 'Markdown',
-  filePath:
-    'C:\\Users\\Yesseliz\\Desktop\\LIM010-fe-md-links\\test\\testData\\prueba.md',
+  filePath: mdFile,
   statusText: 'OK',
   status: 200,
 };
@@ -26,8 +25,7 @@ const linkOk = {
 const linkFail = {
   hrefPath: 'https://nodejs.org/es/abou1t/',
   textPath: 'Node.js',
-  filePath:
-    'C:\\Users\\Yesseliz\\Desktop\\LIM010-fe-md-links\\test\\testData\\prueba.md',
+  filePath: mdFile,
   statusText: 'FAIL',
   status: 404,
 };
@@ -86,13 +84,6 @@ describe('Validate links', () => {
     }));
 });
 
-describe('mdLinks', () => {
-  it('Deberia retornar un array de objetos del link', () => moduleImport.mdLinks(mdFile)
-    .then((result) => {
-      expect(result[0]).toEqual(readFileMdArray);
-    }));
-});
-
 describe('option stats', () => {
   it('Deberia retornar las estadísticas del link en un string', () => moduleImport.optionStats(mdFile)
     .then((result) => {
@@ -100,9 +91,63 @@ describe('option stats', () => {
     }));
 });
 
-/* describe('option validate and stats', () => {
-  it('Deberia retornar las estadísticas y validaciones del link en un string', () => moduleImport.optionStats(mdFile)
+describe('option validate and stats', () => {
+  it('Deberia retornar las estadísticas y validaciones del link en un string', () => moduleImport.OptionsValidateStats(mdFile)
+    .then((result) => {
+      expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+    }));
+});
+
+describe('option validate', () => {
+  it('Deberia retornar los links validados', () => moduleImport.optionValidate(mdFile)
+    .then((result) => {
+      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${mdFile} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+    }));
+});
+
+describe('mdLinks', () => {
+  it('Deberia retornar un array de objetos del link', () => moduleImport.mdLinks(mdFile)
+    .then((result) => {
+      expect(result[0]).toEqual(readFileMdArray);
+    }));
+  it('Deberia retornar un array de objetos con los links validados', () => moduleImport.mdLinks(mdFile, { validate: true })
+    .then((result) => {
+      expect(result[0]).toEqual(linkOk);
+    }));
+  it('Deberia mostrar un mensaje: No se encuentra la ruta', () => moduleImport.mdLinks('no-route')
+    .catch((err) => {
+      expect(err.message).toEqual(`No se encuentra la ruta: ${path.join(process.cwd(), 'no-route')}`);
+    }));
+});
+
+describe('cli mdlinks', () => {
+  it('Deberia retornar un mensaje: El archivo o directorio no cuentiene links ', () => cliImport.cliMdLinks(path.join(process.cwd(), 'src'))
+    .then((result) => {
+      expect(result).toEqual('El archivo o directorio no cuentiene links');
+    }));
+
+  it('Deberia retornar un string: con la validacion y estado de los links ', () => cliImport.cliMdLinks(mdFile, { validate: true, stats: true })
+    .then((result) => {
+      expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+    }));
+
+  it('Deberia retornar un string: con el estado de los links ', () => cliImport.cliMdLinks(mdFile, { stats: true })
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2');
     }));
-}); */
+
+  it('Deberia retornar un string: con los links validados', () => cliImport.cliMdLinks(mdFile, { validate: true })
+    .then((result) => {
+      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${mdFile} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+    }));
+
+  it('Deberia retornar un string: con los links', () => cliImport.cliMdLinks(mdFile)
+    .then((result) => {
+      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown Markdown\n${mdFile} https://nodejs.org/es/abou1t/ Node.js`);
+    }));
+
+  it('Deberia mostrar un mensaje: No se encuentra la ruta', () => cliImport.cliMdLinks('no-route')
+    .catch((err) => {
+      expect(err.message).toEqual(`No se encuentra la ruta: ${path.join(process.cwd(), 'no-route')}`);
+    }));
+});

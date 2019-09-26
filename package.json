@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "eslint": "eslint --ext .js src/ test/",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "build": "webpack -p --color"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,8 @@
     "stylelint-config-recommended": "^2.2.0"
   },
   "dependencies": {
+    "color": "^3.1.2",
+    "colors": "^1.4.0",
     "core-util-is": "^1.0.2",
     "gitignore": "^0.6.0",
     "is-valid-path": "^0.1.1",

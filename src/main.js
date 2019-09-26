@@ -63,17 +63,18 @@ const linksValidate = (route) => {
       return validateLinks;
     });
 };
-// linksValidate('../test/testData').then((response) => console.log(response));
+
+// linksValidate('../test/testData/prueba.md').then((response) => console.log(response));
 
 const optionValidate = (route) => new Promise((resolve) => {
   linksValidate(route)
     .then((arrLinks) => {
       const strLinks = arrLinks.map((link) => `${link.filePath} ${link.hrefPath} ${link.statusText} ${link.status} ${link.textPath}`);
-      resolve(strLinks.join('\n '));
+      resolve(strLinks.join('\n'));
     });
 });
 
-// optionValidate('../test/testData').then((response) => console.log(response));
+// optionValidate('../test/testData/prueba.md').then((response) => console.log(response));
 
 const uniqueLinks = (arrLinks) => [...new Set(arrLinks.map((link) => link.hrefPath))];
 const brokenLinks = (arrValidateLinks) => arrValidateLinks.filter((link) => link.status >= 400);
@@ -108,7 +109,7 @@ const mdLinks = (route, options) => new Promise((resolve, reject) => {
 
 /* mdLinks('../test/testData', { validate: true }).then((response) => {
   console.log(response);
-});    */
+}); */
 
 /* mdLinks('../test/testData').then((response) => {
   console.log(response);
