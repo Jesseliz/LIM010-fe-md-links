@@ -44,7 +44,7 @@ const readFileMd = (route) => {
   return links;
 };
 
-// Funcion que valida los links OK or FAIL
+// Función para validar los links OK or FAIL
 const linksValidate = (route) => {
   const arrObjLinks = readFileMd(route);
   const arrLinks = arrObjLinks.map((link) => link.hrefPath);
