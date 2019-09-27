@@ -19,7 +19,7 @@ en formato `Markdown`, para verificar los links que contengan y reportar
 algunas estadísticas.
 
 ## Diagrama de Flujo de la Libreria
-![diagrama de flujo md-links](Diagrama de flujo mdLinks.PNG)
+![diagrama de flujo md-links](DFmdLinks.PNG)
 
 ## Objetivos
 
