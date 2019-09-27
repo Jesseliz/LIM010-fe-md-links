@@ -87,7 +87,7 @@ const optionStats = (route) => new Promise((resolve) => {
   resolve(`Total: ${arrMdLinks.length}\nUnique: ${uniqueLinks(arrMdLinks).length}`);
 });
 
-// Función que devuelve los stats y validación de los links
+// Función que devuelve los stats y validación de los links en string
 const OptionsValidateStats = (route) => new Promise((resolve) => {
   linksValidate(route)
     .then((links) => {
