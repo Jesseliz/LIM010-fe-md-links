@@ -88,7 +88,7 @@ describe('option stats', () => {
 });
 
 describe('option validate and stats', () => {
-  it('Should retornar las estadísticas y validaciones del link en un string', () => moduleImport.OptionsValidateStats(mdFile)
+  it('Should return the links statistics and links validations in a string', () => moduleImport.OptionsValidateStats(mdFile)
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
     }));
