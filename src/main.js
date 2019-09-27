@@ -7,7 +7,7 @@ const convertToAbsolutePath = (route) => (path.isAbsolute(route) ? route : path.
 
 const readMdExtend = (route) => (path.extname(route) === '.md');
 
-// devuelve todos los archivos md
+// Función que devuelve todos los archivos md
 const saveMdFile = (route) => {
   if (fs.statSync(route).isDirectory()) {
     const arrDataFiles = fs.readdirSync(route);
@@ -26,6 +26,7 @@ const saveMdFile = (route) => {
   return [];
 };
 
+// Función que devuelve un array de objetos con href, text, file 
 const readFileMd = (route) => {
   const links = [];
   const renderer = new marked.Renderer();
@@ -44,6 +45,7 @@ const readFileMd = (route) => {
   return links;
 };
 
+// Funcion que valida los links OK or FAIL
 const linksValidate = (route) => {
   const arrObjLinks = readFileMd(route);
   const arrLinks = arrObjLinks.map((link) => link.hrefPath);
@@ -66,24 +68,27 @@ const linksValidate = (route) => {
 
 // linksValidate('../test/testData/prueba.md').then((response) => console.log(response));
 
+// Función que devuelve en string los links validados
 const optionValidate = (route) => new Promise((resolve) => {
   linksValidate(route)
     .then((arrLinks) => {
-      const strLinks = arrLinks.map((link) => `${link.filePath} ${link.hrefPath} ${link.statusText} ${link.status} ${link.textPath}`);
+      const strLinks = arrLinks.map((link) => `${path.relative(process.cwd(), link.filePath)} ${link.hrefPath} ${link.statusText} ${link.status} ${link.textPath}`);
       resolve(strLinks.join('\n'));
     });
 });
 
-// optionValidate('../test/testData/prueba.md').then((response) => console.log(response));
+// optionValidate('../test/testData/').then((response) => console.log(response));
 
 const uniqueLinks = (arrLinks) => [...new Set(arrLinks.map((link) => link.hrefPath))];
 const brokenLinks = (arrValidateLinks) => arrValidateLinks.filter((link) => link.status >= 400);
 
+// Función que devuelve los stats de los links
 const optionStats = (route) => new Promise((resolve) => {
   const arrMdLinks = readFileMd(route);
   resolve(`Total: ${arrMdLinks.length}\nUnique: ${uniqueLinks(arrMdLinks).length}`);
 });
 
+// Función que devuelve los stats y validación de los links
 const OptionsValidateStats = (route) => new Promise((resolve) => {
   linksValidate(route)
     .then((links) => {
@@ -91,10 +96,7 @@ const OptionsValidateStats = (route) => new Promise((resolve) => {
     });
 });
 
-// OptionsValidateStats('../test/testData/prueba.md').then((response) => { console.log(response); });
-
-// console.log(uniqueLinks(readFileMd('../test/testData')).length);
-
+// retorna una promesa con los links de la ruta
 const mdLinks = (route, options) => new Promise((resolve, reject) => {
   if (fs.existsSync(route)) {
     if (options && options.validate) {

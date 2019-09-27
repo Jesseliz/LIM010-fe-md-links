@@ -1,4 +1,3 @@
-
 // import { readPath, convertToAbsoluteRute, readMdExtend } from '../src/main.js';
 const path = require('path');
 const moduleImport = require('../src/main.js');
@@ -7,6 +6,10 @@ const cliImport = require('../src/cliMdLinks.js');
 const testDirectory = path.join(process.cwd(), 'test');
 const mdFile = path.join(process.cwd(), 'test', 'testData', 'prueba.md');
 const subMdFile = path.join(testDirectory, 'testData', 'subPath', 'subPrueba.md');
+const relativePath = 'test\\testData\\prueba.md';
+/*
+const relativePath = path.relative(process.cwd(), mdFile);
+console.log(relativePath); */
 
 const readFileMdArray = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',
@@ -101,7 +104,7 @@ describe('option validate and stats', () => {
 describe('option validate', () => {
   it('Deberia retornar los links validados', () => moduleImport.optionValidate(mdFile)
     .then((result) => {
-      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${mdFile} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
     }));
 });
 
@@ -138,12 +141,12 @@ describe('cli mdlinks', () => {
 
   it('Deberia retornar un string: con los links validados', () => cliImport.cliMdLinks(mdFile, { validate: true })
     .then((result) => {
-      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${mdFile} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
     }));
 
   it('Deberia retornar un string: con los links', () => cliImport.cliMdLinks(mdFile)
     .then((result) => {
-      expect(result).toEqual(`${mdFile} https://es.wikipedia.org/wiki/Markdown Markdown\n${mdFile} https://nodejs.org/es/abou1t/ Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown Markdown\n${relativePath} https://nodejs.org/es/abou1t/ Node.js`);
     }));
 
   it('Deberia mostrar un mensaje: No se encuentra la ruta', () => cliImport.cliMdLinks('no-route')

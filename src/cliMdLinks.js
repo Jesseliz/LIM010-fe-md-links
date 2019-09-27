@@ -1,3 +1,4 @@
+const path = require('path');
 const mdLinks = require('./main.js');
 
 const cliMdLinks = (route, options) => new Promise((resolve, reject) => {
@@ -12,7 +13,7 @@ const cliMdLinks = (route, options) => new Promise((resolve, reject) => {
       } else if (options && options.validate) {
         resolve(mdLinks.optionValidate(route));
       } else {
-        const stringLinks = links.map((link) => `${link.filePath} ${link.hrefPath} ${link.textPath}`);
+        const stringLinks = links.map((link) => `${path.relative(process.cwd(), link.filePath)} ${link.hrefPath} ${link.textPath}`);
         resolve(stringLinks.join('\n'));
       }
     }).catch((err) => {

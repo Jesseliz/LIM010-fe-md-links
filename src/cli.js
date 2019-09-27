@@ -19,7 +19,6 @@ process.argv.forEach((element) => {
   }
 });
 
-
 if (!route) {
   console.log(colors.red('Ingrese la ruta de un directorio o archivo'));
 } else {
