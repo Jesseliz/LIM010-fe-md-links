@@ -14,7 +14,7 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
   
 
 ## Diagrama de Flujo 
-![enter image description here](https://lh3.googleusercontent.com/yHNn7G7MbewYOFujS30xPS_6TM1My_wyZd2utSG7BlIVH8zVhZtaEMSXLc0xERBGI8nt9erYLGyw "Diagrama de flujo mdLinks") 
+![enter image description here](img/DFMdlinks.png "Diagrama de flujo mdLinks") 
 
 ## Implementación
 
@@ -59,7 +59,7 @@ Para ejecutar la aplicación debe escribir la siguiente linea de comandos a trav
 
 por ejemplo:
 
-![enter image description here](https://lh3.googleusercontent.com/efbGsBer2kB4pgfQQwyTdHFtViEnzJf95bNXtkNrYXFEBQAxLODYk870GI2HVUMwwKDIRIyqLPVH "mdlinks default")
+![enter image description here](img/md-links.png "mdlinks default")
 
 El comportamiento por defecto no valida si las URLs responden ok o no, solo identifica el archivo markdown (a partir de la ruta que recibe como argumento), analiza el archivo Markdown e imprime los links que vaya encontrando, junto con la ruta del archivo donde se encontraron y el texto que hay dentro del link (truncado a 50 caracteres).
 
@@ -71,7 +71,7 @@ Si pasamos la opción  `--validate`, `--v` o `v`, el módulo hace una petición 
 
 Por ejemplo:
 
-![enter image description here](https://lh3.googleusercontent.com/S2exotT9y9Z_02BC7EdDVrtA74my9mOkN8XJuZnnul405v-huiPYCmMbJO456SLXM6TiUveTAdjj "mdlinks -v")
+![enter image description here](img/mdLinks-V.PNG "mdlinks -v")
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de la URL, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
 
@@ -80,16 +80,16 @@ Si pasamos la opción  `--stats` , `--s`  o `s` el output (salida) será un text
 
 Por ejemplo:
 
-![enter image description here](https://lh3.googleusercontent.com/j7Srfe6eVSiFjAPNYn-3Av8diXCPEX7x6CXtyi_eW2dnh1mHyMKPTMv82gPWwLwv8e-QObGI3qKe "mdlinks-s")
+![enter image description here](img/mdLinks-S.PNG "mdlinks-s")
 
 #### `--stats y --validate`
 También podemos combinar ambas opciones  `--stats`  y  `--validate`  para obtener estadísticas que necesiten de los resultados de la validación.
 
 Por ejemplo:
 
-![enter image description here](https://lh3.googleusercontent.com/m5NrWF2_VMQVmgIHpOt5uwsDSd7cZ3nXwdhOV4QZJG7RDliVJNaX8pKXm0aZKATf1WzqBlgxZc0p "mdlibks -both")
+![enter image description here](img/mdLinks-S-V.PNG "mdlibks -both")
 
 ## Instalación 
 
 - Para instalar la libreria vía npm ejecutar la siguiente linea a través de la terminal:
-  `npm install --global <github-user>/md-links`  :wink:
+  `npm install Jesseliz/md-links`  :wink:
