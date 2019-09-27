@@ -81,14 +81,14 @@ describe('Validate links', () => {
 });
 
 describe('option stats', () => {
-  it('Deberia retornar las estadísticas del link en un string', () => moduleImport.optionStats(mdFile)
+  it('Should return links statistics in a string', () => moduleImport.optionStats(mdFile)
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2');
     }));
 });
 
 describe('option validate and stats', () => {
-  it('Deberia retornar las estadísticas y validaciones del link en un string', () => moduleImport.OptionsValidateStats(mdFile)
+  it('Should retornar las estadísticas y validaciones del link en un string', () => moduleImport.OptionsValidateStats(mdFile)
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
     }));
