@@ -69,6 +69,7 @@ El comportamiento por defecto no valida si las URLs responden ok o no, solo iden
 Si pasamos la opción  `--validate`, `--v` o `v`, el módulo hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces considera el link como ok.
 
 Por ejemplo:
+
 ![enter image description here](https://lh3.googleusercontent.com/S2exotT9y9Z_02BC7EdDVrtA74my9mOkN8XJuZnnul405v-huiPYCmMbJO456SLXM6TiUveTAdjj "mdlinks -v")
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de la URL, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
@@ -77,6 +78,7 @@ Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de 
 Si pasamos la opción  `--stats` , `--s`  o `s` el output (salida) será un texto con estadísticas básicas sobre los links.
 
 Por ejemplo:
+
 ![enter image description here](https://lh3.googleusercontent.com/j7Srfe6eVSiFjAPNYn-3Av8diXCPEX7x6CXtyi_eW2dnh1mHyMKPTMv82gPWwLwv8e-QObGI3qKe "mdlinks-s")
 
 #### `--stats y --validate`
