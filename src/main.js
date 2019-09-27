@@ -81,7 +81,7 @@ const optionValidate = (route) => new Promise((resolve) => {
 const uniqueLinks = (arrLinks) => [...new Set(arrLinks.map((link) => link.hrefPath))];
 const brokenLinks = (arrValidateLinks) => arrValidateLinks.filter((link) => link.status >= 400);
 
-// Función que devuelve los stats de los links
+// Función que devuelve los stats de los links en string
 const optionStats = (route) => new Promise((resolve) => {
   const arrMdLinks = readFileMd(route);
   resolve(`Total: ${arrMdLinks.length}\nUnique: ${uniqueLinks(arrMdLinks).length}`);
