@@ -60,6 +60,7 @@ Para ejecutar la aplicación debe escribir la siguiente linea de comandos a trav
 por ejemplo:
 
 ![enter image description here](https://lh3.googleusercontent.com/efbGsBer2kB4pgfQQwyTdHFtViEnzJf95bNXtkNrYXFEBQAxLODYk870GI2HVUMwwKDIRIyqLPVH "mdlinks default")
+
 El comportamiento por defecto no valida si las URLs responden ok o no, solo identifica el archivo markdown (a partir de la ruta que recibe como argumento), analiza el archivo Markdown e imprime los links que vaya encontrando, junto con la ruta del archivo donde se encontraron y el texto que hay dentro del link (truncado a 50 caracteres).
 
 ### Options
