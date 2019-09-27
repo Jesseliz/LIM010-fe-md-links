@@ -1,6 +1,4 @@
 
-  
-
 # Markdown Links
 
   
@@ -61,34 +59,32 @@ Para ejecutar la aplicación debe escribir la siguiente linea de comandos a trav
 
 por ejemplo:
 
-![enter image description here](https://lh3.googleusercontent.com/92ZFOGNo5o8HEKIb_7e8tWt5Fv1PEiI501DS38hNpb7M8JQc3GeTlEomYvRZcTZ9YoVZUN9SSVw9 "md-links default")
+![enter image description here](https://lh3.googleusercontent.com/efbGsBer2kB4pgfQQwyTdHFtViEnzJf95bNXtkNrYXFEBQAxLODYk870GI2HVUMwwKDIRIyqLPVH "mdlinks default")
 El comportamiento por defecto no valida si las URLs responden ok o no, solo identifica el archivo markdown (a partir de la ruta que recibe como argumento), analiza el archivo Markdown e imprime los links que vaya encontrando, junto con la ruta del archivo donde se encontraron y el texto que hay dentro del link (truncado a 50 caracteres).
 
 ### Options
 
 #### `--validate`
 
-Si pasamos la opción  `--validate`, el módulo hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces considera el link como ok.
+Si pasamos la opción  `--validate`, `--v` o `v`, el módulo hace una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una URL que responde ok, entonces considera el link como ok.
 
 Por ejemplo:
-
-![enter image description here](https://lh3.googleusercontent.com/WGM6HATEtN8Db39pvM7Jd1rnqezK1JPtK4DfrqTQtr19_33mnyl4XowfOFhMagaAPvKp8yqo84H4 "mdliks-v")
+![enter image description here](https://lh3.googleusercontent.com/S2exotT9y9Z_02BC7EdDVrtA74my9mOkN8XJuZnnul405v-huiPYCmMbJO456SLXM6TiUveTAdjj "mdlinks -v")
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de la URL, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
 
 #### `--stats`
-Si pasamos la opción  `--stats`  el output (salida) será un texto con estadísticas básicas sobre los links.
-Por ejemplo:
+Si pasamos la opción  `--stats` , `--s`  o `s` el output (salida) será un texto con estadísticas básicas sobre los links.
 
-![enter image description here](https://lh3.googleusercontent.com/cuVOIi7AOvl7OmhOqSEgqt5jhZi32eDGIL4I53tj3MiEW6iHiitjVlK-KG2L9vmo1fxm4lnIMQTw "mdlibks-s")
+Por ejemplo:
+![enter image description here](https://lh3.googleusercontent.com/j7Srfe6eVSiFjAPNYn-3Av8diXCPEX7x6CXtyi_eW2dnh1mHyMKPTMv82gPWwLwv8e-QObGI3qKe "mdlinks-s")
 
 #### `--stats y --validate`
 También podemos combinar ambas opciones  `--stats`  y  `--validate`  para obtener estadísticas que necesiten de los resultados de la validación.
 
 Por ejemplo:
 
-![
-](https://lh3.googleusercontent.com/ZO4K8sKeCcgp2qGPItbXuwjDW0ZGij64ckkmOExxeDrfuQbUU57uWOrS18Y8N5JXBtsTb8qaY-JO "mdlinks-s-v")
+![enter image description here](https://lh3.googleusercontent.com/m5NrWF2_VMQVmgIHpOt5uwsDSd7cZ3nXwdhOV4QZJG7RDliVJNaX8pKXm0aZKATf1WzqBlgxZc0p "mdlibks -both")
 
 ## Instalación 
 
