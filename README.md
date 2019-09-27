@@ -60,6 +60,7 @@ Para ejecutar la aplicación debe escribir la siguiente linea de comandos a trav
 `md-links <path-to-file> [options]`
 
 por ejemplo:
+
 ![enter image description here](https://lh3.googleusercontent.com/92ZFOGNo5o8HEKIb_7e8tWt5Fv1PEiI501DS38hNpb7M8JQc3GeTlEomYvRZcTZ9YoVZUN9SSVw9 "md-links default")
 El comportamiento por defecto no valida si las URLs responden ok o no, solo identifica el archivo markdown (a partir de la ruta que recibe como argumento), analiza el archivo Markdown e imprime los links que vaya encontrando, junto con la ruta del archivo donde se encontraron y el texto que hay dentro del link (truncado a 50 caracteres).
 
