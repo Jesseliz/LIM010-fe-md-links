@@ -1,4 +1,3 @@
-// import { readPath, convertToAbsoluteRute, readMdExtend } from '../src/main.js';
 const path = require('path');
 const moduleImport = require('../src/main.js');
 const cliImport = require('../src/cliMdLinks.js');
@@ -7,9 +6,6 @@ const testDirectory = path.join(process.cwd(), 'test');
 const mdFile = path.join(process.cwd(), 'test', 'testData', 'prueba.md');
 const subMdFile = path.join(testDirectory, 'testData', 'subPath', 'subPrueba.md');
 const relativePath = 'test\\testData\\prueba.md';
-/*
-const relativePath = path.relative(process.cwd(), mdFile);
-console.log(relativePath); */
 
 const readFileMdArray = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',
@@ -33,23 +29,20 @@ const linkFail = {
   status: 404,
 };
 
-describe('convertToAbsoluteRute', () => {
-  it('Debería ser una función', () => {
+describe('Convert To AbsoluteRute', () => {
+  it('Should be a function', () => {
     expect(typeof moduleImport.convertToAbsolutePath).toBe('function');
   });
-  it('Debería convertir una ruta relativa en absoluta', () => {
+  it('Should convert a relative path to absolute path', () => {
     expect(moduleImport.convertToAbsolutePath('test')).toBe(testDirectory);
   });
-  it('Debería retornar la misma ruta absoluta', () => {
+  it('Should return the same absolute path', () => {
     expect(moduleImport.convertToAbsolutePath(testDirectory)).toBe(testDirectory);
   });
 });
 
-describe('readMdExtend', () => {
-  it('Debería ser una función', () => {
-    expect(typeof moduleImport.readMdExtend).toBe('function');
-  });
-  it('Debería retornar true si el archivo tiene la extensión md', () => {
+describe('is MD file?', () => {
+  it('Should return true if the file has a MD extension', () => {
     expect(moduleImport.readMdExtend(mdFile)).toBe(true);
   });
   it('Debería retornar false si el archivo no tiene la extensión md', () => {
@@ -58,11 +51,11 @@ describe('readMdExtend', () => {
 });
 
 describe('Find MdFile', () => {
-  it('Debería retornar un archivo con extencion md', () => {
+  it('should return a md file', () => {
     expect(Array.isArray(moduleImport.saveMdFile(testDirectory))).toBe(true);
     expect(moduleImport.saveMdFile(testDirectory)[0]).toEqual(mdFile);
   });
-  it('Debería retornar todos los archivos md del directorio y subdirectorio', () => {
+  it('Should return all MD files of the directory and subdirectory', () => {
     expect(Array.isArray(moduleImport.saveMdFile(testDirectory))).toBe(true);
     expect(moduleImport.saveMdFile(testDirectory)).toEqual([mdFile, subMdFile]);
   });
