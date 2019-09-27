@@ -24,7 +24,7 @@ if (!route) {
 } else {
   cliMdLinks.cliMdLinks(route, options)
     .then((result) => {
-      console.log(colors.cyan(result));
+      console.log(colors.yellow(result));
     }).catch((err) => {
       console.log(colors.red(err.message));
     });

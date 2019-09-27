@@ -11,7 +11,6 @@ const readMdExtend = (route) => (path.extname(route) === '.md');
 const saveMdFile = (route) => {
   if (fs.statSync(route).isDirectory()) {
     const arrDataFiles = fs.readdirSync(route);
-    // console.log(arrDataFiles); //[ 'prueba.md', 'prueba.txt', 'subPath' ] [ 'subPrueba.md' ]
     const allDataPaths = arrDataFiles.reduce((arrTotalPaths, currentFilePaths) => {
       const absolutePaths = path.resolve(route, currentFilePaths);
       const pathsArr = saveMdFile(absolutePaths);
