@@ -61,15 +61,15 @@ describe('Find MdFile', () => {
   });
 });
 
-describe('Read Md file', () => {
-  it('Debería leer los links del archivo md', () => {
+describe('Read Md file links', () => {
+  it('Should read the href, text and filepath in the md file', () => {
     expect(Array.isArray(moduleImport.readFileMd(mdFile))).toBe(true);
     expect(moduleImport.readFileMd(mdFile)[0]).toEqual(readFileMdArray);
   });
 });
 
 describe('Validate links', () => {
-  it('Deberia retornar una promesa con status OK', () => moduleImport.linksValidate(mdFile)
+  it('Should return a promisse with OK status', () => moduleImport.linksValidate(mdFile)
     .then((result) => {
       expect(result[0]).toEqual(linkOk);
     }));
