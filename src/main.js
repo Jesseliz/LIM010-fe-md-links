@@ -116,8 +116,6 @@ const mdLinks = (route, options) => new Promise((resolve, reject) => {
   console.log(response);
 });  */
 
-// console.log(mdLinks('../src'));
-
 module.exports = {
   convertToAbsolutePath,
   readMdExtend,

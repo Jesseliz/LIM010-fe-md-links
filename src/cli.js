@@ -11,10 +11,10 @@ const options = {
 };
 
 process.argv.forEach((element) => {
-  if (element === '--stats' || element === '--s' || element === 's') {
+  if (element === '--stats' || element === '--s' || element === 's' || element === 'S') {
     options.stats = true;
   }
-  if (element === '--validate' || element === '--v' || element === 'v') {
+  if (element === '--validate' || element === '--v' || element === 'v' || element === 'V') {
     options.validate = true;
   }
 });
