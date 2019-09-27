@@ -74,7 +74,7 @@ describe('Validate links', () => {
       expect(result[0]).toEqual(linkOk);
     }));
 
-  it('Deberia retornar una promesa con status FAIL', () => moduleImport.linksValidate(mdFile)
+  it('Should return a promisse with FAIL status', () => moduleImport.linksValidate(mdFile)
     .then((result) => {
       expect(result[1]).toEqual(linkFail);
     }));
