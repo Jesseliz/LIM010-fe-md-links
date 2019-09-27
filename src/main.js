@@ -95,7 +95,7 @@ const OptionsValidateStats = (route) => new Promise((resolve) => {
     });
 });
 
-// retorna una promesa con los links de la ruta
+// retorna una promesa con los links del path
 const mdLinks = (route, options) => new Promise((resolve, reject) => {
   if (fs.existsSync(route)) {
     if (options && options.validate) {
