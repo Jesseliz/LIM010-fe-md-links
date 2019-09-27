@@ -95,54 +95,54 @@ describe('option validate and stats', () => {
 });
 
 describe('option validate', () => {
-  it('Deberia retornar los links validados', () => moduleImport.optionValidate(mdFile)
+  it('Should return the validated links', () => moduleImport.optionValidate(mdFile)
     .then((result) => {
       expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
     }));
 });
 
 describe('mdLinks', () => {
-  it('Deberia retornar un array de objetos del link', () => moduleImport.mdLinks(mdFile)
+  it('Should return an array of link objects', () => moduleImport.mdLinks(mdFile)
     .then((result) => {
       expect(result[0]).toEqual(readFileMdArray);
     }));
-  it('Deberia retornar un array de objetos con los links validados', () => moduleImport.mdLinks(mdFile, { validate: true })
+  it('should return an array of objects with validated links', () => moduleImport.mdLinks(mdFile, { validate: true })
     .then((result) => {
       expect(result[0]).toEqual(linkOk);
     }));
-  it('Deberia mostrar un mensaje: No se encuentra la ruta', () => moduleImport.mdLinks('no-route')
+  it('should show a message: No se encuentra la ruta', () => moduleImport.mdLinks('no-route')
     .catch((err) => {
       expect(err.message).toEqual(`No se encuentra la ruta: ${path.join(process.cwd(), 'no-route')}`);
     }));
 });
 
 describe('cli mdlinks', () => {
-  it('Deberia retornar un mensaje: El archivo o directorio no cuentiene links ', () => cliImport.cliMdLinks(path.join(process.cwd(), 'src'))
+  it('should show a message: El archivo o directorio no cuentiene links ', () => cliImport.cliMdLinks(path.join(process.cwd(), 'src'))
     .then((result) => {
       expect(result).toEqual('El archivo o directorio no cuentiene links');
     }));
 
-  it('Deberia retornar un string: con la validacion y estado de los links ', () => cliImport.cliMdLinks(mdFile, { validate: true, stats: true })
+  it('should return an string with the validation and status of the links', () => cliImport.cliMdLinks(mdFile, { validate: true, stats: true })
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
     }));
 
-  it('Deberia retornar un string: con el estado de los links ', () => cliImport.cliMdLinks(mdFile, { stats: true })
+  it('should return an string with the status of the links', () => cliImport.cliMdLinks(mdFile, { stats: true })
     .then((result) => {
       expect(result).toEqual('Total: 2\nUnique: 2');
     }));
 
-  it('Deberia retornar un string: con los links validados', () => cliImport.cliMdLinks(mdFile, { validate: true })
+  it('should return an string with validated links', () => cliImport.cliMdLinks(mdFile, { validate: true })
     .then((result) => {
       expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
     }));
 
-  it('Deberia retornar un string: con los links', () => cliImport.cliMdLinks(mdFile)
+  it('should return an string with the links', () => cliImport.cliMdLinks(mdFile)
     .then((result) => {
       expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown Markdown\n${relativePath} https://nodejs.org/es/abou1t/ Node.js`);
     }));
 
-  it('Deberia mostrar un mensaje: No se encuentra la ruta', () => cliImport.cliMdLinks('no-route')
+  it('should show a message: No se encuentra la ruta', () => cliImport.cliMdLinks('no-route')
     .catch((err) => {
       expect(err.message).toEqual(`No se encuentra la ruta: ${path.join(process.cwd(), 'no-route')}`);
     }));
