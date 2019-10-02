@@ -1,11 +1,13 @@
 const path = require('path');
 const moduleImport = require('../src/main.js');
+const mdLinks = require('../src/mdLinks.js');
 const cliImport = require('../src/cliMdLinks.js');
 
 const testDirectory = path.join(process.cwd(), 'test');
 const mdFile = path.join(process.cwd(), 'test', 'testData', 'prueba.md');
 const subMdFile = path.join(testDirectory, 'testData', 'subPath', 'subPrueba.md');
-const relativePath = 'test\\testData\\prueba.md';
+const relativePath = path.join('test', 'testData', 'prueba.md');
+// console.log(relativePath);
 
 const readFileMdArray = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',
@@ -83,34 +85,34 @@ describe('Validate links', () => {
 describe('option stats', () => {
   it('Should return links statistics in a string', () => moduleImport.optionStats(mdFile)
     .then((result) => {
-      expect(result).toEqual('Total: 2\nUnique: 2');
+      expect(result).toEqual('Total: 3\nUnique: 3');
     }));
 });
 
 describe('option validate and stats', () => {
   it('Should return the links statistics and links validations in a string', () => moduleImport.OptionsValidateStats(mdFile)
     .then((result) => {
-      expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+      expect(result).toEqual('Total: 3\nUnique: 3\nBroken: 1');
     }));
 });
 
 describe('option validate', () => {
   it('Should return the validated links', () => moduleImport.optionValidate(mdFile)
     .then((result) => {
-      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js\n${relativePath} https://developer.mo3zilla.org/ FAIL ERROR roto`);
     }));
 });
 
 describe('mdLinks', () => {
-  it('Should return an array of link objects', () => moduleImport.mdLinks(mdFile)
+  it('Should return an array of link objects', () => mdLinks.mdLinks(mdFile)
     .then((result) => {
       expect(result[0]).toEqual(readFileMdArray);
     }));
-  it('should return an array of objects with validated links', () => moduleImport.mdLinks(mdFile, { validate: true })
+  it('should return an array of objects with validated links', () => mdLinks.mdLinks(mdFile, { validate: true })
     .then((result) => {
       expect(result[0]).toEqual(linkOk);
     }));
-  it('should show a message: No se encuentra la ruta', () => moduleImport.mdLinks('no-route')
+  it('should show a message: No se encuentra la ruta', () => mdLinks.mdLinks('no-route')
     .catch((err) => {
       expect(err.message).toEqual(`No se encuentra la ruta: ${path.join(process.cwd(), 'no-route')}`);
     }));
@@ -124,22 +126,22 @@ describe('cli mdlinks', () => {
 
   it('should return an string with the validation and status of the links', () => cliImport.cliMdLinks(mdFile, { validate: true, stats: true })
     .then((result) => {
-      expect(result).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+      expect(result).toEqual('Total: 3\nUnique: 3\nBroken: 1');
     }));
 
   it('should return an string with the status of the links', () => cliImport.cliMdLinks(mdFile, { stats: true })
     .then((result) => {
-      expect(result).toEqual('Total: 2\nUnique: 2');
+      expect(result).toEqual('Total: 3\nUnique: 3');
     }));
 
   it('should return an string with validated links', () => cliImport.cliMdLinks(mdFile, { validate: true })
     .then((result) => {
-      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown OK 200 Markdown\n${relativePath} https://nodejs.org/es/abou1t/ FAIL 404 Node.js\n${relativePath} https://developer.mo3zilla.org/ FAIL ERROR roto`);
     }));
 
   it('should return an string with the links', () => cliImport.cliMdLinks(mdFile)
     .then((result) => {
-      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown Markdown\n${relativePath} https://nodejs.org/es/abou1t/ Node.js`);
+      expect(result).toEqual(`${relativePath} https://es.wikipedia.org/wiki/Markdown Markdown\n${relativePath} https://nodejs.org/es/abou1t/ Node.js\n${relativePath} https://developer.mo3zilla.org/ roto`);
     }));
 
   it('should show a message: No se encuentra la ruta', () => cliImport.cliMdLinks('no-route')

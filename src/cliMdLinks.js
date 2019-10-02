@@ -1,5 +1,6 @@
 const path = require('path');
-const mdLinks = require('./main.js');
+const mainFunctions = require('./main.js');
+const mdLinks = require('./mdLinks.js');
 
 const cliMdLinks = (route, options) => new Promise((resolve, reject) => {
   mdLinks.mdLinks(route, options)
@@ -7,11 +8,11 @@ const cliMdLinks = (route, options) => new Promise((resolve, reject) => {
       if (links.length === 0) {
         resolve('El archivo o directorio no cuentiene links');
       } else if (options && options.stats && options.validate) {
-        resolve(mdLinks.OptionsValidateStats(route));
+        resolve(mainFunctions.OptionsValidateStats(route));
       } else if (options && options.stats) {
-        resolve(mdLinks.optionStats(route));
+        resolve(mainFunctions.optionStats(route));
       } else if (options && options.validate) {
-        resolve(mdLinks.optionValidate(route));
+        resolve(mainFunctions.optionValidate(route));
       } else {
         const stringLinks = links.map((link) => `${path.relative(process.cwd(), link.filePath)} ${link.hrefPath} ${link.textPath}`);
         resolve(stringLinks.join('\n'));

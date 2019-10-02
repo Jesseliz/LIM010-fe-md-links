@@ -10,7 +10,7 @@ const readMdExtend = (route) => (path.extname(route) === '.md');
 // Función que devuelve todos los archivos md
 const saveMdFile = (route) => {
   if (fs.statSync(route).isDirectory()) {
-    const arrDataFiles = fs.readdirSync(route);
+    const arrDataFiles = fs.readdirSync(route); // [ 'prueba.md', 'prueba.txt', 'subPath' ]
     const allDataPaths = arrDataFiles.reduce((arrTotalPaths, currentFilePaths) => {
       const absolutePaths = path.resolve(route, currentFilePaths);
       const pathsArr = saveMdFile(absolutePaths);
@@ -24,8 +24,9 @@ const saveMdFile = (route) => {
   }
   return [];
 };
+// console.log(saveMdFile('../test/testData/'));
 
-// Función que devuelve un array de objetos con href, text, file 
+// Función que devuelve un array de objetos con href, text, file
 const readFileMd = (route) => {
   const links = [];
   const renderer = new marked.Renderer();
@@ -47,23 +48,30 @@ const readFileMd = (route) => {
 // Función para validar los links OK or FAIL
 const linksValidate = (route) => {
   const arrObjLinks = readFileMd(route);
-  const arrLinks = arrObjLinks.map((link) => link.hrefPath);
-  const promises = arrLinks.map((link) => fetch(link));
-  return Promise.all(promises)
+  const arrLinksPromise = arrObjLinks.map((link) => fetch(link.hrefPath)
     .then((response) => {
-      const validateLinks = arrObjLinks.map((objLinks, statsLink) => {
-        if (response[statsLink].ok) {
-          objLinks.statusText = response[statsLink].statusText;
-          objLinks.status = response[statsLink].status;
-        } else {
-          objLinks.statusText = 'FAIL';
-          objLinks.status = response[statsLink].status;
-        }
-        return objLinks;
-      });
-      return validateLinks;
-    });
+      if (response.ok) {
+        return {
+          ...link,
+          statusText: response.statusText,
+          status: response.status,
+        };
+      }
+      return {
+        ...link,
+        statusText: 'FAIL',
+        status: response.status,
+      };
+    })
+    .catch(() => ({
+      ...link,
+      statusText: 'FAIL',
+      status: 'ERROR',
+    })));
+  return Promise.all(arrLinksPromise);
 };
+
+// refactorizar el then y catch por cada fetch y al final retornar el promise por cada fetch
 
 // linksValidate('../test/testData/prueba.md').then((response) => console.log(response));
 
@@ -95,19 +103,6 @@ const OptionsValidateStats = (route) => new Promise((resolve) => {
     });
 });
 
-// retorna una promesa con los links del path
-const mdLinks = (route, options) => new Promise((resolve, reject) => {
-  if (fs.existsSync(route)) {
-    if (options && options.validate) {
-      resolve(linksValidate(route));
-    } else {
-      resolve(readFileMd(route));
-    }
-  } else {
-    reject(new Error(`No se encuentra la ruta: ${path.resolve(route)}`));
-  }
-});
-
 /* mdLinks('../test/testData', { validate: true }).then((response) => {
   console.log(response);
 }); */
@@ -124,7 +119,6 @@ module.exports = {
   linksValidate,
   uniqueLinks,
   brokenLinks,
-  mdLinks,
   optionStats,
   OptionsValidateStats,
   optionValidate,
