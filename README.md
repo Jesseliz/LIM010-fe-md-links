@@ -24,6 +24,15 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
   -   `path`: Ruta absoluta o relativa al archivo o directorio. 
   -   `options`: Un objeto con las siguientes propiedades:
 	    -   `validate`: Booleano que determina si se desea validar los links encontrados.
+#### Uso
+- Para usar la librería debe importar el modulo de la siguiente manera:
+    ```js
+    const  mdLinks  =  require('@Jesseliz/md-links');
+   ```
+ - Para validar el modulo con la opción de validación considere true como argumento.
+	 ```js
+    mdLinks.mdLinks('src', {validate: true}).then((resolve) =>  console.log(resolve));
+   ```
 #### Valor de retorno
 La función retorna una promesa (`Promise`) que resuelva a un arreglo (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene las siguientes propiedades:
 -   `href`: URL encontrada.
@@ -95,15 +104,7 @@ Por ejemplo:
 - Para instalar la libreria vía npm ejecutar la siguiente linea a través de la terminal:
   `npm install Jesseliz/md-links`  :wink:
   
-## Uso
-- Para usar la librería debe importar el modulo de la siguiente manera:
-    ```js
-    const  mdLinks  =  require('@Jesseliz/md-links');
-   ```
- - Para validar el modulo con la opción de validación considere true como argumento.
-	 ```js
-    mdLinks.mdLinks('src', {validate: true}).then((resolve) =>  console.log(resolve));
-   ```
+
  ## Objetivos de aprendizaje
  
 ### Objetivos de aprendizaje pendientes
@@ -165,4 +166,3 @@ Por ejemplo:
 - [Comprendiendo Promesas en Js](https://hackernoon.com/understanding-promises-in-javascript-13d99df067c1)
 - [Pill de recursión - video](https://www.youtube.com/watch?v=lPPgY3HLlhQ&t=916s)
 - [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)
-
