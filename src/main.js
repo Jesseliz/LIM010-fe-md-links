@@ -10,7 +10,7 @@ const readMdExtend = (route) => (path.extname(route) === '.md');
 // Función que devuelve todos los archivos md
 const saveMdFile = (route) => {
   if (fs.statSync(route).isDirectory()) {
-    const arrDataFiles = fs.readdirSync(route); // [ 'prueba.md', 'prueba.txt', 'subPath' ]
+    const arrDataFiles = fs.readdirSync(route);
     const allDataPaths = arrDataFiles.reduce((arrTotalPaths, currentFilePaths) => {
       const absolutePaths = path.resolve(route, currentFilePaths);
       const pathsArr = saveMdFile(absolutePaths);
@@ -24,20 +24,15 @@ const saveMdFile = (route) => {
   }
   return [];
 };
-// console.log(saveMdFile('../test/testData/'));
 
 // Función que devuelve un array de objetos con href, text, file
 const readFileMd = (route) => {
   const links = [];
   const renderer = new marked.Renderer();
   const arrFiles = saveMdFile(route);
-  // recorre el array de rutas
   arrFiles.forEach((file) => {
-    // leer el archivo de la ruta
     const filesData = fs.readFileSync(file, 'utf8');
-    // busca los links de cada archivo
     renderer.link = (href, title, text) => {
-      // Guardar los links en un array de objetos
       links.push({ hrefPath: href, textPath: text, filePath: file });
     };
     marked(filesData, { renderer });
@@ -71,10 +66,6 @@ const linksValidate = (route) => {
   return Promise.all(arrLinksPromise);
 };
 
-// refactorizar el then y catch por cada fetch y al final retornar el promise por cada fetch
-
-// linksValidate('../test/testData/prueba.md').then((response) => console.log(response));
-
 // Función que devuelve en string los links validados
 const optionValidate = (route) => new Promise((resolve) => {
   linksValidate(route)
@@ -83,8 +74,6 @@ const optionValidate = (route) => new Promise((resolve) => {
       resolve(strLinks.join('\n'));
     });
 });
-
-// optionValidate('../test/testData/').then((response) => console.log(response));
 
 const uniqueLinks = (arrLinks) => [...new Set(arrLinks.map((link) => link.hrefPath))];
 const brokenLinks = (arrValidateLinks) => arrValidateLinks.filter((link) => link.status >= 400);
@@ -102,14 +91,6 @@ const OptionsValidateStats = (route) => new Promise((resolve) => {
       resolve(`Total: ${links.length}\nUnique: ${uniqueLinks(links).length}\nBroken: ${brokenLinks(links).length}`);
     });
 });
-
-/* mdLinks('../test/testData', { validate: true }).then((response) => {
-  console.log(response);
-}); */
-
-/* mdLinks('../test/testData').then((response) => {
-  console.log(response);
-});  */
 
 module.exports = {
   convertToAbsolutePath,

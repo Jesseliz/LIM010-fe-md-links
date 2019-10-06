@@ -22,6 +22,4 @@ const cliMdLinks = (route, options) => new Promise((resolve, reject) => {
     });
 });
 
-// cliMdLinks('../test/testData').then((result) => console.log(result));
-
 module.exports = { cliMdLinks };

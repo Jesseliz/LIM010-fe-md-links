@@ -7,7 +7,6 @@ const testDirectory = path.join(process.cwd(), 'test');
 const mdFile = path.join(process.cwd(), 'test', 'testData', 'prueba.md');
 const subMdFile = path.join(testDirectory, 'testData', 'subPath', 'subPrueba.md');
 const relativePath = path.join('test', 'testData', 'prueba.md');
-// console.log(relativePath);
 
 const readFileMdArray = {
   hrefPath: 'https://es.wikipedia.org/wiki/Markdown',

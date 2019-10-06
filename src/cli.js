@@ -1,10 +1,7 @@
-#!/usr/bin/env node
 const colors = require('colors');
 const cliMdLinks = require('./cliMdLinks.js');
 
 const route = process.argv[2];
-// console.log(route);
-
 const options = {
   stats: false,
   validate: false,
